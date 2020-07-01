@@ -64,8 +64,16 @@ public class patternFormatDate {
     @SuppressLint("SimpleDateFormat")
     public static final SimpleDateFormat MMM = new SimpleDateFormat("MMM");
 
-    //format date ex: Oct
+    //format date ex: 27
     @SuppressLint("SimpleDateFormat")
     public static final SimpleDateFormat dd = new SimpleDateFormat("dd");
+    
+        //format date ex: Oct 27, 2020 - 08:20 AM
+    @SuppressLint("SimpleDateFormat")
+    public static final SimpleDateFormat MMM_dd_yyyy_hh_mm_a = new SimpleDateFormat("MMM dd, yyyy - hh:mm a");
+
+    //format date ex: 2020-03-23T09:28:35.56
+    @SuppressLint("SimpleDateFormat")
+    public static final SimpleDateFormat yyyy_MM_dd_T_HH_mm_ss = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 
 }
