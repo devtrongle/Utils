@@ -13,19 +13,19 @@
                     <key>kind</key>
                     <string>software-package</string>
                     <key>url</key>
-                    <string>http://hjyl.syok65.com:81/iOS.hjylresigned.ipa</string>
+                    <string>https://doc-14-5g-docs.googleusercontent.com/docs/securesc/rt6q44tfcs6kv1et388q1af0av29b54l/oujf6sjl4d1kjnp4rjai709qv199icg8/1597721400000/00384981403615821050/00384981403615821050/10KSzHWIzCIL_ZBnorbpCuaQYvQuDQfwM?e=download&authuser=1&nonce=kuvmg9cubh6gu&user=00384981403615821050&hash=9cmu2ciluc5tn0innea41jgf0iajvdl8</string>
                 </dict>
             </array>
             <key>metadata</key>
             <dict>
                 <key>bundle-identifier</key>
-                <string>com.aruistar.cmcapp</string>
+                <string>SK8K8G42Y4.com.onebyte.scpviewerapp</string>
                 <key>bundle-version</key>
                 <string>1.0</string>
                 <key>kind</key>
                 <string>software</string>
                 <key>title</key>
-                <string>cmcapp</string>
+                <string>SecondClone</string>
             </dict>
         </dict>
     </array>
