@@ -32,7 +32,7 @@
            </array><key>metadata</key>
            <dict>
                <key>bundle-identifier</key>
-               <string>SK8K8G42Y4.com.onebyte.scpviewerapp</string>
+               <string>com.onebyte.scpviewerapp</string>
                <key>bundle-version</key>
                <string>1.0.0</string>
                <key>kind</key>
