@@ -1,11 +1,10 @@
-package com.OneByte.Affiligate.utils;
 
 /*
- *  Date created: 11/12/2019
- *  Last updated: 11/12/2019
- *  Name project: Affiligate
+ *  Date created: 
+ *  Last updated: 
+ *  Name project: 
  *  Description:
- *  Auth: trong.le@1byte.com
+ *  Auth: James Ryan
  */
 
 public class AreaCode {
