@@ -1,37 +1,29 @@
+#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME};#end
+#parse("File Header.java")
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
+import androidx.annotation.NonNull;
 
-/**
- *  Date created: 2020/11/17
- *  Last updated: 2020/11/17
- *  Name of project: 
- *  Description: SpHelper (SharedPreferences Util)
- *  Auth: @TrongLE
- *  Mail: batrong2709@gmail.com
- */
+public class ${NAME} {
+    public static final String TAG = ${NAME}.class.getSimpleName();
 
-public class SpHelper {
-
-    public static final String TAG = SpHelper.class.getSimpleName();
-
-    private static SpHelper instance;
-
-    private final Context context;
+    @SuppressLint("StaticFieldLeak")
+    private static ${NAME} instance;
 
     private final SharedPreferences sharedPref;
 
     /**
      * @param context A Context of the application package implementing this class.
      */
-    private SpHelper(Context context) {
-        this.context = context;
+    private ${NAME}(Context context) {
         this.sharedPref = context.getSharedPreferences(SpHelper.class.getSimpleName()+"Data", Context.MODE_PRIVATE);
     }
 
-    public static SpHelper getInstance(Context context) {
+    public static ${NAME} getInstance(@NonNull Context context) {
         if(instance == null)
-            instance = new SpHelper(context);
+            instance = new ${NAME}(context);
         return instance;
     }
 
@@ -117,5 +109,4 @@ public class SpHelper {
         editor.clear();
         editor.apply();
     }
-
 }
