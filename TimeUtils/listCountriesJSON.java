@@ -1,11 +1,11 @@
 
 
 /*
- *  Date created: 11/11/2019
- *  Last updated: 11/11/2019
+ *  Date created:  
+ *  Last updated:  
  *  Name project: 
  *  Description:
- *  Auth: trong.le@1byte.com
+ *  Auth: James Ryan
  */
 
 import com.OneByte.Affiligate.Model.objCountries;
