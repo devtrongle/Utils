@@ -4,3 +4,21 @@
  Description: $file.className
  Auth: @TrongLE
  Email: 
+
+
+---------------------------------------
+
+public static final String TAG = $className$.class.getSimpleName();
+private final Context context = this;
+
+private $nameBinding$ mView;
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    mView = $nameBinding$.inflate(getLayoutInflater());
+    setContentView(mView.getRoot());
+
+}
+
+
