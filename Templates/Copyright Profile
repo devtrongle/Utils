@@ -1,0 +1,6 @@
+ Date created: $today.year/$today.month/$today.day
+ Last updated: $file.lastModified.year/$file.lastModified.month/$file.lastModified.day
+ Name of project: $project.name
+ Description: $file.className
+ Auth: @TrongLE
+ Email: 
