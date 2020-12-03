@@ -11,7 +11,7 @@ public class ${ClassName} extends SQLiteOpenHelper {
     private final String TAG = ${ClassName}.class.getSimpleName();
     
     private static final String DATABASE_NAME = "DATABASE_HELPER";
-    public static final int DATABASE_VERSION = 0;
+    public static final int DATABASE_VERSION = 1;
 
     private static ${ClassName} instance;
 
