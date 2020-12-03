@@ -52,6 +52,15 @@ public class ${ClassName} {
      * @return status
      */
     public boolean add(){
+//        if(!checkItemExistByID(city.getId())){
+//            ContentValues values = new ContentValues();
+//
+//            SQLiteDatabase db = mDatabase.getWritableDatabase();
+//            long result = db.insert(TABLE_NAME, null, values);
+//
+//            return result >= 0;
+//        }else
+//            return false;
         return true;
     }
 
@@ -61,6 +70,16 @@ public class ${ClassName} {
      * @return status
      */
     public boolean update(){
+//        if(checkItemExistByID(city.getId())){
+//            ContentValues values = new ContentValues();
+//            SQLiteDatabase db = mDatabase.getWritableDatabase();
+//            long result = db.update(TABLE_NAME,
+//                    values,
+//                    KEY_ID + " = ?",
+//                    new String[] { String.valueOf(city.getId()) });
+//            return result >= 0;
+//        }else
+//            return false;
         return true;
     }
 
