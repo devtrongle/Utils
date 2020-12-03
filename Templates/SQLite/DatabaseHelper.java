@@ -35,7 +35,12 @@ public class ${ClassName} extends SQLiteOpenHelper {
 
     }
 
-    boolean checkTableExist(String tableName){
+    /**
+     * Check whether the table exists in the database or not
+     * @param tableName The name of the table will be checked
+     * @return table exists or not
+     */
+    public boolean checkTableExist(String tableName){
         SQLiteDatabase db = this.getReadableDatabase();
 
         if (tableName == null || db == null || !db.isOpen())
