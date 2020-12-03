@@ -112,6 +112,7 @@ public class ${ClassName} {
      */
     public boolean checkItemExistByID(){
         SQLiteDatabase db = mDatabase.getReadableDatabase();
+        //String query = String.format("SELECT %s FROM %s WHERE %s = %s", KEY_ID, TABLE_NAME, KEY_ID, id);
         String query = String.format("");
         Cursor cursor = db.rawQuery(query, null);
 
@@ -131,6 +132,7 @@ public class ${ClassName} {
      * @return object
      */
     public Object getItemByID(final int id){
+        //String query = String.format("SELECT %s FROM %s WHERE %s = %s", KEY_ID, TABLE_NAME, KEY_ID, id);
         String query = String.format("");
         SQLiteDatabase db = mDatabase.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
