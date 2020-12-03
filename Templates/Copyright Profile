@@ -22,3 +22,11 @@ protected void onCreate(Bundle savedInstanceState) {
 }
 
 
+---------------------------------------
+//Create spinner adapter
+
+ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                R.layout.support_simple_spinner_dropdown_item,
+                $arrayName$);
+adapter.setDropDownViewResource(android.R.layout.simple_list_item_activated_1);
+
