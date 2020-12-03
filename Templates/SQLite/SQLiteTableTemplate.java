@@ -89,6 +89,8 @@ public class ${ClassName} {
      * @return delete status
      */
     public boolean delete(){
+//        SQLiteDatabase db = mDatabase.getWritableDatabase();
+//        return db.delete(TABLE_NAME, KEY_ID + " = ? AND " + KEY_ID + " = ?", new String[]{String.valueOf(id)}) > 0;
         return true;
     }
 
