@@ -37,6 +37,8 @@ public class RequestPermissions {
             if (listRequest.size() > 0) {
                 String[] permissions = new String[listRequest.size()];
                 ActivityCompat.requestPermissions(activity, listRequest.toArray(permissions), REQUEST_PERMISSION_CODE);
+            }else{
+                callback.onGrantPermission(true, listRequest, new ArrayList<>());
             }
         }
     }
