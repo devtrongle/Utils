@@ -47,7 +47,7 @@ public class ${ClassName} extends RecyclerView.Adapter<${ClassName}.ViewHolder> 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(${BindingView}.inflate(LayoutInflater.from(context),parent,false));
+        return new ViewHolder(${BindingView}Binding.inflate(LayoutInflater.from(context),parent,false));
     }
 
     @Override
@@ -62,9 +62,9 @@ public class ${ClassName} extends RecyclerView.Adapter<${ClassName}.ViewHolder> 
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
-        private ${BindingView} mView;
+        private ${BindingView}Binding mView;
 
-        private ViewHolder(${BindingView} mView) {
+        private ViewHolder(${BindingView}Binding mView) {
             super(mView.getRoot());
             this.mView = mView;
         }
