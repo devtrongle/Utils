@@ -101,12 +101,13 @@ public class ${ClassName} extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         if (viewType == VIEW_TYPE_ITEM) {
             return new ItemViewHolder(${BindingView}Binding.inflate(LayoutInflater.from(context), parent, false));
         }else {
-            FrameLayout llLoadMore = new FrameLayout(context);
+            RelativeLayout llLoadMore = new RelativeLayout(context);
             ProgressBar progressBar = new ProgressBar(context);
             progressBar.setIndeterminate(true);
             progressBar.getIndeterminateDrawable().setColorFilter(Color.parseColor("#1DA1F2"), android.graphics.PorterDuff.Mode.MULTIPLY);
-            FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(40,40);
-            layoutParams.gravity = Gravity.CENTER;
+            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,50);
+            layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
+            layoutParams.setMargins(0,15,0,15);
             llLoadMore.addView(progressBar,layoutParams);
             return new LoadingViewHolder(llLoadMore);
         }
