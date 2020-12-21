@@ -2,10 +2,11 @@
 #parse("File Header.java")
 import android.content.Context;
 import android.graphics.Color;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
@@ -30,7 +31,7 @@ public class ${ClassName} extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
     public interface IListener {
-        void onClick(ObjEvaluate data, int position);
+        void onClick(${Model} data, int position);
     }
 
     public ${ClassName}(@NonNull Context context, @NonNull ArrayList<${Model}> mListData) {
@@ -101,13 +102,12 @@ public class ${ClassName} extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         if (viewType == VIEW_TYPE_ITEM) {
             return new ItemViewHolder(${BindingView}Binding.inflate(LayoutInflater.from(context), parent, false));
         }else {
-            RelativeLayout llLoadMore = new RelativeLayout(context);
+            FrameLayout llLoadMore = new FrameLayout(context);
             ProgressBar progressBar = new ProgressBar(context);
             progressBar.setIndeterminate(true);
             progressBar.getIndeterminateDrawable().setColorFilter(Color.parseColor("#1DA1F2"), android.graphics.PorterDuff.Mode.MULTIPLY);
-            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,50);
-            layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
-            layoutParams.setMargins(0,15,0,15);
+            FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(40,40);
+            layoutParams.gravity = Gravity.CENTER;
             llLoadMore.addView(progressBar,layoutParams);
             return new LoadingViewHolder(llLoadMore);
         }
@@ -118,7 +118,7 @@ public class ${ClassName} extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
      */
     public void addViewLoadMore() {
         isLoaderVisible = true;
-        mListData.add(new ObjEvaluate());
+        mListData.add(new ${Model}());
         notifyItemInserted(mListData.size() - 1);
     }
 
