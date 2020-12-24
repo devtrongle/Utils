@@ -34,6 +34,11 @@ public class ${ClassName} extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         void onClick(${Model} data, int position);
     }
 
+    public ${ClassName}(@NonNull Context context) {
+        this.mListData = new ArrayList<>();
+        this.context = context;
+    }
+    
     public ${ClassName}(@NonNull Context context, @NonNull ArrayList<${Model}> mListData) {
         this.mListData = mListData;
         this.context = context;
