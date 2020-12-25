@@ -30,3 +30,13 @@ ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 $arrayName$);
 adapter.setDropDownViewResource(android.R.layout.simple_list_item_activated_1);
 
+
+    /**
+     * Cài đặt màu đen cho chữ trên status bar
+     */
+    public void setBlackTextColorStatusBar(){
+        //Cài đặt màu đen cho chữ trên status bar
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
+    }
