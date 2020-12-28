@@ -42,6 +42,22 @@ public class RequestPermissions {
             }
         }
     }
+    
+        /**
+     * Check the list of permissions approved or not
+     * @param listPermissions List of permissions to license  {@see AndroidManifest.xml }
+     * @return Authorized or not
+     */
+    public boolean checkPermissionGrant(ArrayList<String> listPermissions) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            for (String permission : listPermissions) {
+                if (ActivityCompat.checkSelfPermission(activity, permission) != PackageManager.PERMISSION_GRANTED) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 
 
     /**
