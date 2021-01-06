@@ -25,25 +25,27 @@ public class RequestPermissions {
      * Request permissions
      * @param listPermissions List of permissions to license  {@see AndroidManifest.xml }
      */
-    public void requestPermissions(ArrayList<String> listPermissions) {
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+    public void sendRequest(ArrayList<String> listPermissions) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             ArrayList<String> listRequest = new ArrayList<>();
-            for(String permission : listPermissions){
+            for (String permission : listPermissions) {
                 if (ActivityCompat.checkSelfPermission(activity, permission) != PackageManager.PERMISSION_GRANTED) {
                     listRequest.add(permission);
                 }
             }
-            
+
             if (listRequest.size() > 0) {
                 String[] permissions = new String[listRequest.size()];
                 ActivityCompat.requestPermissions(activity, listRequest.toArray(permissions), REQUEST_PERMISSION_CODE);
             }else{
-                callback.onGrantPermission(true, listRequest, new ArrayList<>());
+                callback.onGrantPermission(true, listPermissions, new ArrayList<>());
             }
+        }else{
+            callback.onGrantPermission(true, listPermissions, new ArrayList<>());
         }
     }
-    
-        /**
+
+    /**
      * Check the list of permissions approved or not
      * @param listPermissions List of permissions to license  {@see AndroidManifest.xml }
      * @return Authorized or not
@@ -58,7 +60,6 @@ public class RequestPermissions {
         }
         return true;
     }
-
 
     /**
      * Call from Activity#onRequestPermissionsResult
