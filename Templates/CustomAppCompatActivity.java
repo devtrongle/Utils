@@ -10,6 +10,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public abstract class CustomAppCompatActivity extends AppCompatActivity {
 
+    public static class ToastStatus{
+        public static final int STATUS_SUCCESS = 1;
+        public static final int STATUS_DEFAULT = 0;
+        public static final int STATUS_FAIL = 2;
+    }
+    
     
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,4 +52,115 @@ public abstract class CustomAppCompatActivity extends AppCompatActivity {
      */
     protected abstract void initActon();
     
+    /**
+     * Cài đặt màu cho text trên status bar
+     * @param isResetDefault nếu false set màu đen cho text ngược lại reset lại mặc định trong style.xml
+     */
+    public void setBlackTextColorStatusBar(boolean isResetDefault){
+        //Cài đặt màu đen cho chữ trên status bar
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if(isResetDefault){
+                getWindow().getDecorView().setSystemUiVisibility(0);
+            }else{
+                getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+            }
+        }
+    }
+
+    /**
+     * init toolbar
+     * @param toolbar toolbar view
+     */
+    public void initToolbar(Toolbar toolbar){
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        toolbar.setNavigationOnClickListener(v -> finish());
+    }
+
+    /**
+     * init toolbar
+     * @param toolbar toolbar view
+     * @param resId navigation icon
+     */
+    public void initToolbar(Toolbar toolbar, @DrawableRes int resId){
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        toolbar.setNavigationIcon(resId);
+        toolbar.setNavigationOnClickListener(v -> finish());
+    }
+    
+    /**
+     * Show the view for the specified duration.
+     * @param message message
+     * @param gravity Set the location at which the notification should appear on the screen.
+     * @see android.view.Gravity
+     */
+    public void showCustomToast(String message, int gravity){
+        Toast toast = new Toast(this);
+        CustomToastBinding mViewToast = CustomToastBinding.inflate(getLayoutInflater());
+        toast.setView(mViewToast.getRoot());
+        mViewToast.tvContentToast.setText(message);
+        toast.setGravity(gravity,0,0);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.show();
+
+    }
+
+
+    /**
+     * Show the view for the specified duration.
+     * @param resID the resource identifier of the string resource to be displayed
+     * @param gravity Set the location at which the notification should appear on the screen.
+     * @see android.view.Gravity
+     */
+    public void showCustomToast(@StringRes int resID, int gravity){
+        Toast toast = new Toast(this);
+        CustomToastBinding mViewToast = CustomToastBinding.inflate(getLayoutInflater());
+        toast.setView(mViewToast.getRoot());
+        mViewToast.tvContentToast.setText(resID);
+        toast.setGravity(gravity,0,0);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.show();
+    }
+
+    /**
+     * Show the view for the specified duration.
+     * @param message message
+     * @param gravity Set the location at which the notification should appear on the screen.
+     *                @see android.view.Gravity
+     * @param status set the status for the toast
+     *               @see alo360.com.guarantee.views.CustomAppCompatActivity.ToastStatus
+     *
+     */
+    public void showCustomToast(String message, int gravity, int status){
+        Toast toast = new Toast(this);
+        CustomToastBinding mViewToast = CustomToastBinding.inflate(getLayoutInflater());
+        toast.setView(mViewToast.getRoot());
+        mViewToast.tvContentToast.setText(message);
+        int iconID = -1;
+        switch (status){
+            case ToastStatus.STATUS_DEFAULT:
+                mViewToast.tvContentToast.setTextColor(Color.WHITE);
+                break;
+            case ToastStatus.STATUS_FAIL:
+                mViewToast.tvContentToast.setTextColor(Color.RED);
+                iconID = R.drawable.ic_baseline_error_outline_18;
+                break;
+            case ToastStatus.STATUS_SUCCESS:
+                mViewToast.tvContentToast.setTextColor(Color.GREEN);
+                iconID = R.drawable.ic_baseline_check_circle_outline_18;
+                break;
+        }
+
+        if(iconID != -1){
+            mViewToast.tvContentToast.setCompoundDrawablesWithIntrinsicBounds(iconID,0,0,0);
+            mViewToast.tvContentToast.setCompoundDrawablePadding(10);
+        }
+
+        toast.setGravity(gravity,0,0);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.show();
+    }
 }
