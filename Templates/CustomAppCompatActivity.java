@@ -91,7 +91,7 @@ public abstract class CustomAppCompatActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(v -> finish());
     }
     
-    /**
+     /**
      * Show the view for the specified duration.
      * @param message message
      * @param gravity Set the location at which the notification should appear on the screen.
@@ -99,15 +99,55 @@ public abstract class CustomAppCompatActivity extends AppCompatActivity {
      */
     public void showCustomToast(String message, int gravity){
         Toast toast = new Toast(this);
-        CustomToastBinding mViewToast = CustomToastBinding.inflate(getLayoutInflater());
-        toast.setView(mViewToast.getRoot());
-        mViewToast.tvContentToast.setText(message);
+        RelativeLayout rlMain = initCustomToastView();
+        TextView tvContent = (TextView) rlMain.getChildAt(0);
+        if(tvContent != null){
+            tvContent.setText(message);
+            tvContent.setTextColor(Color.WHITE);
+        }
+        toast.setView(rlMain);
         toast.setGravity(gravity,0,0);
         toast.setDuration(Toast.LENGTH_SHORT);
         toast.show();
 
     }
 
+    /**
+     * Khởi tạo giao diện cho toast
+     * @return view
+     */
+    private RelativeLayout initCustomToastView(){
+        RelativeLayout rlMain = new RelativeLayout(this);
+
+        TextView tvContent = new TextView(this);
+        tvContent.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        tvContent.setTextSize(15);
+
+        RelativeLayout.LayoutParams lpContent = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        lpContent.setMargins(28,22,28,22);
+        lpContent.addRule(RelativeLayout.CENTER_IN_PARENT);
+        rlMain.addView(tvContent,lpContent);
+
+        RelativeLayout.LayoutParams lpMain = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        lpMain.setMargins(2,2,2,2);
+        rlMain.setLayoutParams(lpMain);
+
+
+        int startColor = Color.rgb(15,32,39);
+        int centerColor = Color.rgb(32,58,67);
+        int endColor = Color.rgb(44,83,100);
+
+        GradientDrawable gradientDrawable = new GradientDrawable();
+        gradientDrawable.setColors(new int[]{startColor,centerColor,endColor});
+        gradientDrawable.setAlpha(204);
+        gradientDrawable.setShape(GradientDrawable.RECTANGLE);
+        gradientDrawable.setStroke(1, Color.WHITE);
+        gradientDrawable.setCornerRadius(18);
+
+        rlMain.setBackground(gradientDrawable);
+
+        return rlMain;
+    }
 
     /**
      * Show the view for the specified duration.
@@ -117,9 +157,13 @@ public abstract class CustomAppCompatActivity extends AppCompatActivity {
      */
     public void showCustomToast(@StringRes int resID, int gravity){
         Toast toast = new Toast(this);
-        CustomToastBinding mViewToast = CustomToastBinding.inflate(getLayoutInflater());
-        toast.setView(mViewToast.getRoot());
-        mViewToast.tvContentToast.setText(resID);
+        RelativeLayout rlMain = initCustomToastView();
+        TextView tvContent = (TextView) rlMain.getChildAt(0);
+        if(tvContent != null){
+            tvContent.setText(resID);
+            tvContent.setTextColor(Color.WHITE);
+        }
+        toast.setView(rlMain);
         toast.setGravity(gravity,0,0);
         toast.setDuration(Toast.LENGTH_SHORT);
         toast.show();
@@ -136,29 +180,31 @@ public abstract class CustomAppCompatActivity extends AppCompatActivity {
      */
     public void showCustomToast(String message, int gravity, int status){
         Toast toast = new Toast(this);
-        CustomToastBinding mViewToast = CustomToastBinding.inflate(getLayoutInflater());
-        toast.setView(mViewToast.getRoot());
-        mViewToast.tvContentToast.setText(message);
-        int iconID = -1;
-        switch (status){
-            case ToastStatus.STATUS_DEFAULT:
-                mViewToast.tvContentToast.setTextColor(Color.WHITE);
-                break;
-            case ToastStatus.STATUS_FAIL:
-                mViewToast.tvContentToast.setTextColor(Color.RED);
-                iconID = R.drawable.ic_baseline_error_outline_18;
-                break;
-            case ToastStatus.STATUS_SUCCESS:
-                mViewToast.tvContentToast.setTextColor(Color.GREEN);
-                iconID = R.drawable.ic_baseline_check_circle_outline_18;
-                break;
-        }
+        RelativeLayout rlMain = initCustomToastView();
+        TextView tvContent = (TextView) rlMain.getChildAt(0);
+        if(tvContent != null){
+            tvContent.setText(message);
+            int iconID = -1;
+            switch (status){
+                case ToastStatus.STATUS_DEFAULT:
+                    tvContent.setTextColor(Color.WHITE);
+                    break;
+                case ToastStatus.STATUS_FAIL:
+                    tvContent.setTextColor(Color.RED);
+                    iconID = R.drawable.ic_baseline_error_outline_18;
+                    break;
+                case ToastStatus.STATUS_SUCCESS:
+                    tvContent.setTextColor(Color.GREEN);
+                    iconID = R.drawable.ic_baseline_check_circle_outline_18;
+                    break;
+            }
 
-        if(iconID != -1){
-            mViewToast.tvContentToast.setCompoundDrawablesWithIntrinsicBounds(iconID,0,0,0);
-            mViewToast.tvContentToast.setCompoundDrawablePadding(10);
+            if(iconID != -1){
+                tvContent.setCompoundDrawablesWithIntrinsicBounds(iconID,0,0,0);
+                tvContent.setCompoundDrawablePadding(10);
+            }
         }
-
+        toast.setView(rlMain);
         toast.setGravity(gravity,0,0);
         toast.setDuration(Toast.LENGTH_SHORT);
         toast.show();
