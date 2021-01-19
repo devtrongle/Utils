@@ -13,24 +13,34 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitClient {
 
     public static final String TAG = RetrofitClient.class.getSimpleName();
+    private final Context context;
+    private final DataClient mDataClient;
 
-    private static Retrofit retrofit = null;
+    @SuppressLint("StaticFieldLeak")
+    private static RetrofitClient instance;
 
-    public static Retrofit getClient(String baseUrl) {
-        if (retrofit==null) {
-            OkHttpClient builder = new OkHttpClient.Builder()
-                    .readTimeout(5000, TimeUnit.MILLISECONDS)
-                    .writeTimeout(5000,TimeUnit.MILLISECONDS)
-                    .connectTimeout(5000,TimeUnit.MILLISECONDS)
-                    .retryOnConnectionFailure(true)
-                    .build();
-            Gson gson = new GsonBuilder().setLenient().create();
-            retrofit = new Retrofit.Builder()
-                    .baseUrl(baseUrl)
-                    .addConverterFactory(GsonConverterFactory.create(gson))
-                    .client(builder)
-                    .build();
+   private RetrofitClient(Context context){
+        this.context = context;
+        final String url = SpHelper.getInstance(context).getValueString(SpHelper.KeyList.URL_SERVER);
+        OkHttpClient builder = new OkHttpClient.Builder()
+                .readTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(60, TimeUnit.SECONDS)
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .retryOnConnectionFailure(true)
+                .build();
+        Gson gson = new GsonBuilder().setLenient().create();
+        Retrofit mRetrofit = new Retrofit.Builder()
+                .baseUrl(url)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .client(builder)
+                .build();
+        mDataClient = mRetrofit.create(DataClient.class);
+    }
+
+    public static RetrofitClient getInstance(Context context){
+        if(instance == null){
+            instance = new RetrofitClient(context);
         }
-        return retrofit;
+        return instance;
     }
 }
