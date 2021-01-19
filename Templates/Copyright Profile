@@ -31,6 +31,9 @@ ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
 adapter.setDropDownViewResource(android.R.layout.simple_list_item_activated_1);
 
 
+---------------------------------------
+
+
     /**
      * Cài đặt màu đen cho chữ trên status bar
      */
@@ -39,4 +42,16 @@ adapter.setDropDownViewResource(android.R.layout.simple_list_item_activated_1);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
+    }
+    
+    
+    /**
+     * Chuyển đổi từ kiểu Object sang kiểu Custom Object
+     * @param object object cần chuyển
+     * @param classOfT Custom Object
+     * @param <T> Custom Object Class
+     * @return Custom Object
+     */
+    public static  <T> T convertObjectToCustomObject(Object object, Class<T> classOfT){
+        return new Gson().fromJson(new Gson().toJson(object), (Type) classOfT);
     }
