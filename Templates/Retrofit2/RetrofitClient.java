@@ -43,4 +43,51 @@ public class RetrofitClient {
         }
         return instance;
     }
+    
+     /**
+     * Hàm rút gọn thao tác request lên api bằng retrofit
+     * @param call interface của retrofit 
+     *             @see  alo360.com.guarantee.retrofit2.DataClient
+     * @param callback hàm trả về kết quả sau khi request lên server
+     * @param <T> Custom object
+     */
+    private  <T> void requestAPI(@NonNull Call<T> call, @NonNull ICallbackRequestAPI<T> callback){
+        call.enqueue(new Callback<T>() {
+            @Override
+            public void onResponse(@NonNull Call<T> call, @NonNull Response<T> response) {
+                if (response.body() != null) {
+                    callback.onResponse(response.body());
+                } else {
+                    callback.onFailure(context.getString(R.string.Cannot_download_data_from_server));
+                    Log.e(TAG, "Method [requestAPI]: response.body() == NULL");
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<T> call, @NonNull Throwable t) {
+                callback.onFailure(t.getMessage());
+                Log.e(TAG, "Method [requestAPI]: "+t.getMessage());
+            }
+        });
+    }
+
+    /**
+     * Interface trả về kết quả sau khi request
+     * @param <T> custom object
+     */
+    private interface ICallbackRequestAPI <T>{
+        /**
+         * Nếu thành công trả về trong đây
+         * @param data dữ liệu sau khi thành công
+         */
+        void onResponse(@NonNull T data);
+
+        /**
+         * Thất bại trả về tin nhắn trong đây
+         * @param message tin nhắn thất bại
+         */
+        void onFailure(String message);
+    }
+
+
 }
