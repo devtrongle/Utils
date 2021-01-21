@@ -1,11 +1,27 @@
 #if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME};#end
 #parse("File Header.java")
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 
 public abstract class CustomAppCompatActivity extends AppCompatActivity {
@@ -209,4 +225,57 @@ public abstract class CustomAppCompatActivity extends AppCompatActivity {
         toast.setDuration(Toast.LENGTH_SHORT);
         toast.show();
     }
+    
+    /**
+     * Send email
+     * @param emails list of email
+     * @param title title email
+     * @param body content
+     */
+    public void sendEmail(@NonNull String[] emails, @Nullable String title, @Nullable String body){
+        final Intent iEmail = new Intent(android.content.Intent.ACTION_SEND);
+        iEmail.setType("message/rfc822");
+        iEmail.putExtra(android.content.Intent.EXTRA_EMAIL, emails);
+
+        if(title != null){
+            iEmail.putExtra(Intent.EXTRA_SUBJECT, title);
+        }
+        if(body != null){
+            iEmail.putExtra(Intent.EXTRA_TEXT, body);
+        }
+
+        try {
+            startActivity(Intent.createChooser(iEmail, getString(R.string.Send_mail_by)));
+        } catch (android.content.ActivityNotFoundException ex) {
+            Log.e(TAG, "[sendEmail --> " + ex.getMessage());
+            showCustomToast("Could not find \"Email\" application!", Gravity.CENTER,ToastStatus.STATUS_FAIL);
+        }
+    }
+
+    /**
+     * Open a browser and go to the link
+     * @param url URL to go to
+     */
+    public void openBrowser(@NonNull String url){
+        Intent iBrowser = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        startActivity(iBrowser);
+    }
+
+    /**
+     * Open the google map app and get directions to the location by latitude longitude
+     * @param latitude Latitude destination
+     * @param longitude Longitude destination
+     */
+    @SuppressLint("QueryPermissionsNeeded")
+    public void openMapDirections(double latitude, double longitude){
+        Uri gmmIntentUri = Uri.parse(String.format("google.navigation:q=%s,%s", latitude, longitude));
+        Intent iMap = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        iMap.setPackage("com.google.android.apps.maps");
+        if (iMap.resolveActivity(getPackageManager()) != null) {
+            startActivity(iMap);
+        }else{
+            showCustomToast("Could not find \"Google Map\" application!",Gravity.CENTER,ToastStatus.STATUS_FAIL);
+        }
+    }
+
 }
