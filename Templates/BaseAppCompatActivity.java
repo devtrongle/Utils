@@ -1,7 +1,9 @@
 #if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME};#end
 #parse("File Header.java")
 
+    
 import android.annotation.SuppressLint;
+import android.Manifest;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
@@ -15,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.location.Location;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
@@ -23,8 +26,12 @@ import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 
-public abstract class CustomAppCompatActivity extends AppCompatActivity {
+
+public abstract class BaseAppCompatActivity extends AppCompatActivity {
 
     public static class ToastStatus{
         public static final int STATUS_SUCCESS = 1;
@@ -276,6 +283,38 @@ public abstract class CustomAppCompatActivity extends AppCompatActivity {
         }else{
             showCustomToast("Could not find \"Google Map\" application!",Gravity.CENTER,ToastStatus.STATUS_FAIL);
         }
+    }
+    
+    /**
+     * implementation 'com.google.android.gms:play-services-location:17.1.0'
+     * Get location of the device
+     */
+    public void getCurrentLocation(IGetLocation callback) {
+        FusedLocationProviderClient fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            showCustomToast("Please grant permission!", Gravity.CENTER);
+            return;
+        }
+
+        fusedLocationClient.getLastLocation()
+                .addOnSuccessListener((Activity) this, new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        //Got last known location. In some rare situations this can be null.
+                        if (location != null) {
+                            //Do something here
+                        }
+
+                        if(callback != null){
+                            callback.onGetLocationCompleted(location);
+                        }
+                    }
+                });
+    }
+    
+    public interface IGetLocation{
+        void onGetLocationCompleted(Location location);
     }
 
 }
