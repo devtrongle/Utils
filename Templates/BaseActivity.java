@@ -76,7 +76,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
     protected abstract void initActon();
     
     /**
-     * Cài đặt màu cho text trên status bar
+     * Cài đặt màu cho text trên status bar <item name="android:windowActivityTransitions">true</item>
      * @param isResetDefault nếu false set màu đen cho text ngược lại reset lại mặc định trong style.xml
      */
     public void setBlackTextColorStatusBar(boolean isResetDefault){
