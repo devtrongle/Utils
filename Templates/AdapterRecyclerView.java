@@ -70,6 +70,12 @@ public class ${ClassName} extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         this.mListData.addAll(mListData.size(),listData);
         notifyItemRangeChanged(mListData.size() - listData.size(),mListData.size());
     }
+    
+    public void removeDataSource() {
+        if(this.mListData != null)
+            this.mListData.clear();
+        notifyDataSetChanged();
+    }
 
     /**
      * Get item at position
