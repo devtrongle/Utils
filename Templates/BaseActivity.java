@@ -76,6 +76,41 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
     protected abstract void initActon();
     
     /**
+     * Start service nếu service đang stop
+     * @param serviceClass service class
+     */
+    public void startService(Class<?> serviceClass){
+        if(!isMyServiceRunning(serviceClass)){
+            startService(new Intent(this,serviceClass));
+        }
+    }
+
+    /**
+     * Stop service nếu service đang start
+     * @param serviceClass service class
+     */
+    public void stopService(Class<?> serviceClass){
+        if(isMyServiceRunning(serviceClass)){
+            stopService(new Intent(this,serviceClass));
+        }
+    }
+
+    /**
+     * Kiểm tra service có đang hoạt động hay không
+     * @param serviceClass service class
+     * @return true là đang hoạt động
+     */
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    /**
      * Cài đặt màu cho text trên status bar <item name="android:windowActivityTransitions">true</item>
      * @param isResetDefault nếu false set màu đen cho text ngược lại reset lại mặc định trong style.xml
      */
