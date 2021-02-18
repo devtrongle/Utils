@@ -5,6 +5,9 @@
 import android.annotation.SuppressLint;
 import android.Manifest;
 import android.content.Intent;
+import android.app.Activity;
+import android.app.ActivityManager;
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
