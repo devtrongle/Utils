@@ -64,7 +64,7 @@ public class VersionAppInfo {
     }
   
    public boolean compareVersion(int versionNew){
-        return getVersionCode() <= versionNew;
+        return getVersionCode() < versionNew;
     }
 
     public String getVersionNameAndCode(){
