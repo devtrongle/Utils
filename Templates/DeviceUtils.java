@@ -252,22 +252,36 @@ public class DeviceUtils {
     }
 
 
+    
     /**
-     *
-     * @return status network
+     * Checks whether the device currently has a network connection.
+     * @return true if the device has a network connection, false otherwise.
      */
-    public boolean isNetworkAvailable(){
-        ConnectivityManager connectivityManager = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        //we are connected to a network
-        return connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected();
-
+    public boolean isDeviceOnline() {
+        ConnectivityManager connMgr = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        return (networkInfo != null && networkInfo.isConnected());
     }
+
+    /**
+     * Check that Google Play services APK is installed and up to date.
+     * @return true if Google Play Services is available and up to
+     *     date on this device; false otherwise.
+     */
+    public boolean isGooglePlayServicesAvailable() {
+        GoogleApiAvailability apiAvailability =
+                GoogleApiAvailability.getInstance();
+        final int connectionStatusCode =
+                apiAvailability.isGooglePlayServicesAvailable(context);
+        return connectionStatusCode == ConnectionResult.SUCCESS;
+    }
+    
 
     /**
      * Get location of the device
      */
     public void getLocation() {
-        if(checkPlayServices()){
+        if(isGooglePlayServicesAvailable()){
             FusedLocationProviderClient fusedLocationClient = LocationServices.getFusedLocationProviderClient(context);
             if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                     ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -291,14 +305,7 @@ public class DeviceUtils {
         }
     }
 
-    /**
-     * Check if the Play service is available
-     * @return exits or not exist
-     */
-    public boolean checkPlayServices() {
-        GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
-        return apiAvailability.isGooglePlayServicesAvailable(context) == ConnectionResult.SUCCESS;
-    }
+
 
     /**
      * Get the screen width or height of the device
