@@ -11,7 +11,7 @@
 					<key>kind</key>
 					<string>software-package</string>
 					<key>url</key>
-					<string>https://srv-file21.gofile.io/downloadStore/srv-store2/Bo4KXC/SecondClone-Viewer.ipa</string>
+					<string>https://store4.gofile.io/download/c628e271-2bcf-4180-b3a6-236157dd3627/BeMil_9100.ipa</string>
 				</dict>
 				<dict>
 					<key>kind</key>
@@ -19,7 +19,7 @@
 					<key>needs-shine</key>
 					<true/>
 					<key>url</key>
-					<string>https://srv-file21.gofile.io/download/1iYkHf/logo_app.png</string>
+					<string>https://store1.gofile.io/download/8e8b0f2b-b03e-46d9-aa25-628c82eaa6ab/unnamed.png</string>
 				</dict>
 				<dict>
 					<key>kind</key>
@@ -27,19 +27,19 @@
 					<key>needs-shine</key>
 					<true/>
 					<key>url</key>
-					<string>https://srv-file21.gofile.io/download/1iYkHf/logo_app.png</string>
+					<string>https://store1.gofile.io/download/8e8b0f2b-b03e-46d9-aa25-628c82eaa6ab/unnamed.png</string>
 				</dict>
 			</array>
 			<key>metadata</key>
 			<dict>
 				<key>bundle-identifier</key>
-				<string>com.onebyte.scpviewerapp</string>
+				<string>com.Bemil.bechill2</string>
 				<key>bundle-version</key>
-				<string>1.0</string>
+				<string>9100</string>
 				<key>kind</key>
 				<string>software</string>
 				<key>title</key>
-				<string>Viewer App</string>
+				<string>BeMil</string>
 			</dict>
 		</dict>
 	</array>
