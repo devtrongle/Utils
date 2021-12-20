@@ -33,9 +33,9 @@
 			<key>metadata</key>
 			<dict>
 				<key>bundle-identifier</key>
-				<string>com.Bemil.bechill2</string>
+				<string>com.bemil.ios0</string>
 				<key>bundle-version</key>
-				<string>9100</string>
+				<string>1.5</string>
 				<key>kind</key>
 				<string>software</string>
 				<key>title</key>
